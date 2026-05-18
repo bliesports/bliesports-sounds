@@ -2,658 +2,740 @@
 <html lang="tr">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
-    <title>Bli Sounds | E-Spor Müzik Platformu</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BLI Esports - Sounds</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Rajdhani:wght@500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
     <style>
+        /* --- GLOBAL STYLES --- */
+        :root {
+            --bg-color: #0b0b0e;
+            --panel-color: #13131a;
+            --primary: #9d4edd; /* Neon Mor */
+            --primary-glow: rgba(157, 78, 221, 0.5);
+            --secondary: #e0aaff;
+            --text-color: #f7f4f9;
+            --muted-text: #7b7585;
+            --accent: #ff007f; /* Uyarı ve Canlılık için Pembe */
+        }
+
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            user-select: none;
+            font-family: 'Rajdhani', sans-serif;
+            -webkit-tap-highlight-color: transparent;
         }
 
         body {
-            background: radial-gradient(circle at 20% 30%, #0a0f1a, #030507);
-            font-family: 'Poppins', 'Orbitron', 'Segoe UI', system-ui, -apple-system, 'Inter', sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
             min-height: 100vh;
-            color: #eef5ff;
-            padding: 20px;
-            position: relative;
+            display: flex;
+            flex-direction: column;
             overflow-x: hidden;
+            background-image: radial-gradient(circle at 50% 0%, #240046 0%, transparent 50%);
         }
 
-        body::before {
-            content: "";
-            position: fixed;
+        /* --- HEADER & NAVIGATION --- */
+        header {
+            background-color: rgba(19, 19, 26, 0.8);
+            backdrop-filter: blur(10px);
+            border-bottom: 2px solid var(--primary);
+            box-shadow: 0 4px 20px var(--primary-glow);
+            position: sticky;
             top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: radial-gradient(circle at 70% 20%, rgba(0, 255, 170, 0.05), transparent 70%);
-            pointer-events: none;
-            z-index: 0;
+            z-index: 100;
         }
 
-        .app-container {
-            max-width: 1300px;
+        .nav-container {
+            max-width: 1200px;
             margin: 0 auto;
-            position: relative;
-            z-index: 2;
-            backdrop-filter: blur(2px);
-        }
-
-        .gaming-header {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            flex-wrap: wrap;
-            padding: 15px 25px;
-            background: rgba(10, 20, 28, 0.65);
-            backdrop-filter: blur(12px);
-            border-radius: 50px;
-            margin-bottom: 45px;
-            border: 1px solid rgba(0, 255, 200, 0.3);
-            box-shadow: 0 8px 20px rgba(0,0,0,0.5), 0 0 12px rgba(0,255,180,0.2);
+            padding: 15px 20px;
         }
 
-        .logo h1 {
-            font-size: 1.8rem;
-            font-weight: 700;
-            letter-spacing: -0.5px;
-            background: linear-gradient(135deg, #aaffdd, #0aff9e);
-            -webkit-background-clip: text;
-            background-clip: text;
-            color: transparent;
-            text-shadow: 0 0 5px #0aff9e80;
+        .logo {
+            font-family: 'Orbitron', sans-serif;
+            font-weight: 900;
+            font-size: 1.5rem;
+            letter-spacing: 2px;
+            color: var(--text-color);
+            text-transform: uppercase;
+            text-shadow: 0 0 10px var(--primary);
         }
+
         .logo span {
-            font-size: 0.8rem;
-            color: #4affb5;
-            letter-spacing: 1px;
+            color: var(--primary);
         }
 
         .nav-tabs {
             display: flex;
-            gap: 20px;
-            background: rgba(0,0,0,0.5);
-            padding: 8px 20px;
-            border-radius: 60px;
-            backdrop-filter: blur(4px);
+            gap: 15px;
         }
+
         .tab-btn {
-            background: none;
-            border: none;
-            font-size: 1.2rem;
-            font-weight: 600;
-            font-family: 'Orbitron', monospace;
-            padding: 8px 24px;
-            border-radius: 40px;
+            background: transparent;
+            border: 1px solid transparent;
+            color: var(--muted-text);
+            padding: 8px 20px;
+            font-size: 1.1rem;
+            font-weight: 700;
+            text-transform: uppercase;
             cursor: pointer;
-            color: #ccddee;
-            transition: all 0.2s ease;
-            letter-spacing: 1px;
-        }
-        .tab-btn.active {
-            background: #0aff9e20;
-            color: #0effb0;
-            box-shadow: 0 0 8px #0aff9e;
-            border: 1px solid #0aff9e;
-            text-shadow: 0 0 3px #0aff9e;
-        }
-        .tab-btn:hover:not(.active) {
-            color: #aaffdd;
-            background: #ffffff10;
-            transform: scale(1.02);
+            border-radius: 4px;
+            transition: all 0.3s ease;
+            font-family: 'Orbitron', sans-serif;
         }
 
-        .page-view {
-            animation: fadeSlideUp 0.35s cubic-bezier(0.2, 0.9, 0.4, 1.1);
-        }
-        @keyframes fadeSlideUp {
-            from {
-                opacity: 0;
-                transform: translateY(18px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
+        .tab-btn:hover, .tab-btn.active {
+            color: var(--text-color);
+            border-color: var(--primary);
+            background-color: rgba(157, 78, 221, 0.1);
+            box-shadow: 0 0 10px var(--primary-glow);
         }
 
-        .game-cards {
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: center;
-            gap: 40px;
-            margin-top: 40px;
-        }
-        .game-card {
-            background: linear-gradient(145deg, #11161f, #070b10);
-            border-radius: 36px;
-            padding: 30px 40px;
-            width: 280px;
-            text-align: center;
-            cursor: pointer;
-            transition: all 0.25s ease;
-            border: 1px solid #2affaa30;
-            box-shadow: 0 15px 35px rgba(0,0,0,0.6);
-        }
-        .game-card:hover {
-            transform: translateY(-8px);
-            border-color: #0affb0;
-            box-shadow: 0 0 22px #0aff9e40;
-        }
-        .game-card h2 {
-            font-size: 1.8rem;
-            font-weight: 800;
-            background: linear-gradient(135deg, #f0f0f0, #8effc0);
-            -webkit-background-clip: text;
-            background-clip: text;
-            color: transparent;
+        /* --- MAIN CONTENT & VIEWS --- */
+        main {
+            flex: 1;
+            max-width: 1200px;
+            width: 100%;
+            margin: 40px auto;
+            padding: 0 20px;
+            position: relative;
         }
 
-        .music-list {
-            background: rgba(12, 18, 28, 0.7);
-            backdrop-filter: blur(8px);
-            border-radius: 48px;
-            padding: 25px;
-            border: 1px solid #2effae30;
+        .view {
+            display: none;
+            animation: fadeIn 0.5s ease forwards;
+        }
+
+        .view.active {
+            display: block;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        h2 {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 2rem;
+            margin-bottom: 30px;
+            text-transform: uppercase;
+            border-left: 4px solid var(--primary);
+            padding-left: 15px;
+            text-shadow: 0 0 8px var(--primary-glow);
+        }
+
+        /* --- CARDS & GRID LAYOUT --- */
+        .grid-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 25px;
             margin-top: 20px;
         }
-        .music-item {
+
+        .card {
+            background-color: var(--panel-color);
+            border: 1px solid rgba(157, 78, 221, 0.2);
+            border-radius: 8px;
+            padding: 30px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 3px;
+            background: linear-gradient(90deg, transparent, var(--primary), transparent);
+            transform: translateX(-100%);
+            transition: transform 0.5s ease;
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+            border-color: var(--primary);
+            box-shadow: 0 10px 25px rgba(157, 78, 221, 0.15);
+        }
+
+        .card:hover::before {
+            transform: translateX(100%);
+        }
+
+        .card i {
+            font-size: 3rem;
+            color: var(--primary);
+            margin-bottom: 20px;
+            transition: transform 0.3s ease;
+        }
+
+        .card:hover i {
+            transform: scale(1.1);
+        }
+
+        .card h3 {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 1.3rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        /* --- MUSIC PLAYER COMPONENT --- */
+        .track-list {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        .music-row {
+            background-color: var(--panel-color);
+            border-radius: 6px;
+            padding: 15px 20px;
             display: flex;
             align-items: center;
             justify-content: space-between;
-            flex-wrap: wrap;
-            gap: 15px;
-            background: #0a101c80;
-            margin-bottom: 20px;
-            padding: 15px 25px;
-            border-radius: 60px;
-            border-left: 5px solid #0aff9e;
-        }
-        .music-info {
-            flex: 3;
-            font-weight: 600;
-            font-size: 1.1rem;
-        }
-        .controls {
-            display: flex;
-            align-items: center;
             gap: 20px;
-            flex-wrap: wrap;
-            flex: 5;
+            border-left: 3px solid var(--primary);
         }
-        .play-pause {
-            background: #0aff9e20;
-            border: 1px solid #0aff9e;
-            color: #0aff9e;
-            font-size: 1.3rem;
-            padding: 8px 18px;
-            border-radius: 40px;
-            cursor: pointer;
-            font-weight: bold;
-            min-width: 95px;
-        }
-        .play-pause:hover {
-            background: #0aff9e;
-            color: #0a0f1a;
-            box-shadow: 0 0 12px #0aff9e;
-        }
-        .progress-wrapper {
-            flex: 2;
+
+        .track-info {
             display: flex;
             align-items: center;
-            gap: 12px;
+            gap: 15px;
+            min-width: 200px;
         }
-        input[type="range"] {
+
+        .track-info i {
+            color: var(--primary);
+            font-size: 1.2rem;
+        }
+
+        .track-name {
+            font-size: 1.2rem;
+            font-weight: 700;
+        }
+
+        .player-controls {
+            display: flex;
+            align-items: center;
+            gap: 15px;
             flex: 1;
-            height: 5px;
-            -webkit-appearance: none;
-            background: #2c3e40;
-            border-radius: 10px;
-            outline: none;
         }
-        input[type="range"]::-webkit-slider-thumb {
-            -webkit-appearance: none;
-            width: 15px;
-            height: 15px;
-            background: #0aff9e;
+
+        .play-btn {
+            background: var(--primary);
+            border: none;
+            color: var(--text-color);
+            width: 40px;
+            height: 40px;
             border-radius: 50%;
             cursor: pointer;
-            box-shadow: 0 0 6px #0aff9e;
-        }
-        .time {
-            font-family: monospace;
-            font-size: 0.8rem;
-            background: #00000060;
-            padding: 4px 10px;
-            border-radius: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.2s ease;
         }
 
-        .hero-player {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            background: linear-gradient(125deg, #0b1120, #04070e);
-            border-radius: 64px;
-            padding: 45px 30px;
-            margin: 30px 0;
-            border: 1px solid cyan;
-            box-shadow: 0 20px 35px #00000055;
+        .play-btn:hover {
+            transform: scale(1.1);
+            box-shadow: 0 0 10px var(--primary);
         }
-        .big-play {
-            width: 110px;
-            height: 110px;
-            border-radius: 60px;
-            background: #0aff9e20;
-            border: 2px solid #0aff9e;
-            font-size: 3.5rem;
+
+        .progress-container {
+            flex: 1;
             display: flex;
             align-items: center;
-            justify-content: center;
+            gap: 10px;
+        }
+
+        .progress-bar {
+            flex: 1;
+            -webkit-appearance: none;
+            appearance: none;
+            height: 6px;
+            border-radius: 3px;
+            background: #2a2a35;
+            outline: none;
             cursor: pointer;
-            transition: 0.2s;
-            margin-bottom: 35px;
-        }
-        .big-play:hover {
-            background: #0aff9e;
-            color: #010101;
-            transform: scale(1.05);
-            box-shadow: 0 0 28px #0aff9e;
-        }
-        .song-title {
-            font-size: 2rem;
-            font-weight: 800;
-            margin-bottom: 20px;
-        }
-        .progress-bar-big {
-            width: 80%;
-            margin: 20px 0;
         }
 
-        .modal-message {
+        .progress-bar::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            appearance: none;
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background: var(--text-color);
+            box-shadow: 0 0 8px var(--primary);
+            cursor: pointer;
+            transition: transform 0.1s;
+        }
+
+        .progress-bar::-webkit-slider-thumb:hover {
+            transform: scale(1.3);
+        }
+
+        .time-display {
+            font-size: 0.9rem;
+            color: var(--muted-text);
+            min-width: 35px;
+        }
+
+        /* --- SOLO PLAYER (FYDEL) --- */
+        .solo-player-container {
+            max-width: 500px;
+            margin: 40px auto;
+            background: linear-gradient(135deg, var(--panel-color) 0%, #1e122b 100%);
+            border: 1px solid var(--primary);
+            border-radius: 12px;
+            padding: 40px;
+            text-align: center;
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.5), 0 0 15px rgba(157, 78, 221, 0.1);
+        }
+
+        .vinyl-disc {
+            width: 180px;
+            height: 180px;
+            border-radius: 50%;
+            background: radial-gradient(circle, #000 20%, #222 21%, #111 40%, var(--primary) 95%, #000 100%);
+            margin: 0 auto 30px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 0 25px rgba(157, 78, 221, 0.3);
+            position: relative;
+        }
+
+        .vinyl-disc::after {
+            content: '';
+            width: 40px;
+            height: 40px;
+            background-color: var(--bg-color);
+            border-radius: 50%;
+            border: 2px solid var(--primary);
+        }
+
+        .rotating {
+            animation: rotateDisc 4s linear infinite;
+        }
+
+        @keyframes rotateDisc {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+
+        .big-play-btn {
+            background: var(--primary);
+            border: none;
+            color: var(--text-color);
+            width: 70px;
+            height: 70px;
+            border-radius: 50%;
+            font-size: 1.8rem;
+            cursor: pointer;
+            margin: 25px auto;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+            box-shadow: 0 0 15px var(--primary-glow);
+        }
+
+        .big-play-btn:hover {
+            transform: scale(1.1);
+            box-shadow: 0 0 25px var(--primary);
+        }
+
+        /* --- MODAL DIALOG (ZYGA UYARISI) --- */
+        .modal-overlay {
             position: fixed;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            background: rgba(0,0,0,0.8);
-            backdrop-filter: blur(8px);
+            background: rgba(0, 0, 0, 0.8);
+            backdrop-filter: blur(5px);
+            display: flex;
+            align-items: center;
+            justify-content: center;
             z-index: 1000;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            visibility: hidden;
             opacity: 0;
-            transition: 0.2s;
+            pointer-events: none;
+            transition: opacity 0.3s ease;
         }
-        .modal-message.active {
-            visibility: visible;
+
+        .modal-overlay.open {
             opacity: 1;
+            pointer-events: auto;
         }
-        .modal-content {
-            background: #0a0f1c;
-            border-radius: 48px;
-            padding: 35px 55px;
+
+        .modal {
+            background: var(--panel-color);
+            border: 2px solid var(--accent);
+            border-radius: 8px;
+            padding: 35px;
+            max-width: 400px;
+            width: 90%;
             text-align: center;
-            border: 2px solid #ff44aa;
-            box-shadow: 0 0 40px #ff44aa70;
-        }
-        .modal-content p {
-            font-size: 1.6rem;
-            font-weight: bold;
-            color: #ff88cc;
-        }
-        .close-modal {
-            margin-top: 30px;
-            background: #ff44aa30;
-            border: 1px solid #ff44aa;
-            padding: 8px 25px;
-            border-radius: 40px;
-            cursor: pointer;
-            color: white;
+            box-shadow: 0 0 30px rgba(255, 0, 127, 0.3);
+            transform: scale(0.8);
+            transition: transform 0.3s ease;
         }
 
-        @media (max-width: 700px) {
-            .gaming-header {
-                flex-direction: column;
-                gap: 18px;
-            }
-            .music-item {
-                flex-direction: column;
-                align-items: stretch;
-            }
-            .controls {
-                justify-content: space-between;
-            }
+        .modal-overlay.open .modal {
+            transform: scale(1);
         }
 
-        .back-button {
-            background: rgba(255,255,255,0.05);
-            border: 1px solid #2affae;
-            padding: 8px 18px;
-            border-radius: 30px;
-            color: #0aff9e;
-            cursor: pointer;
+        .modal i {
+            font-size: 3.5rem;
+            color: var(--accent);
             margin-bottom: 20px;
-            display: inline-flex;
-            align-items: center;
-            gap: 6px;
         }
-        .back-button:hover {
-            background: #0aff9e30;
+
+        .modal h4 {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 1.5rem;
+            margin-bottom: 15px;
+            text-transform: uppercase;
         }
-        .submenu {
-            display: flex;
-            gap: 20px;
+
+        .modal p {
+            color: var(--muted-text);
             margin-bottom: 25px;
-            justify-content: center;
-            margin-top: 40px;
+            font-size: 1.1rem;
         }
-        .choice-btn {
-            background: #11161f;
-            border: 1px solid cyan;
-            padding: 12px 32px;
-            border-radius: 48px;
-            font-size: 1.3rem;
-            font-weight: bold;
+
+        .modal-close {
+            background: var(--accent);
+            color: white;
+            border: none;
+            padding: 10px 25px;
+            font-weight: 700;
+            text-transform: uppercase;
+            border-radius: 4px;
             cursor: pointer;
+            font-family: 'Orbitron', sans-serif;
+            transition: opacity 0.2s;
         }
-        .choice-btn:hover {
-            background: cyan;
-            color: black;
+
+        .modal-close:hover {
+            opacity: 0.9;
         }
-        .info-placeholder {
+
+        /* --- EMPTY STATE STYLE --- */
+        .empty-state {
             text-align: center;
-            padding: 80px 20px;
-            font-size: 1.4rem;
-            color: #aaffdd;
+            padding: 60px 20px;
+            color: var(--muted-text);
+        }
+
+        .empty-state i {
+            font-size: 4rem;
+            margin-bottom: 20px;
+        }
+
+        /* --- FOOTER --- */
+        footer {
+            text-align: center;
+            padding: 20px;
+            color: var(--muted-text);
+            font-size: 0.9rem;
+            margin-top: auto;
+            border-top: 1px solid rgba(157, 78, 221, 0.1);
         }
     </style>
 </head>
 <body>
-<div class="app-container" id="appRoot"></div>
 
-<script>
-    const goldGunSongs = [
-        { name: "Gold Gun - Main Theme", src: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3" },
-        { name: "Gold Gun - Combat Rage", src: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-2.mp3" },
-        { name: "Gold Gun - Victory Lobby", src: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-3.mp3" }
-    ];
-    const fydelSong = { name: "FYDEL - Dark Requiem", src: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-4.mp3" };
+    <header>
+        <div class="nav-container">
+            <div class="logo" onclick="navigateTo('/game-musics')">BLI<span>ESPORTS</span></div>
+            <div class="nav-tabs">
+                <button class="tab-btn" id="tab-game" onclick="navigateTo('/game-musics')">Oyun Müzikleri</button>
+                <button class="tab-btn" id="tab-site" onclick="navigateTo('/site-musics')">Site Müzikleri</button>
+            </div>
+        </div>
+    </header>
 
-    let currentAudio = null;
-    let currentProgressInterval = null;
-    let activeTrackElement = null;
+    <main>
+        
+        <div id="view-site-musics" class="view">
+            <h2>Site Müzikleri</h2>
+            <div class="empty-state">
+                <i class="fa-solid fa-code-branch"></i>
+                <p>Bu alan yakında güncellenecektir birader. Takipte kal!</p>
+            </div>
+        </div>
 
-    function stopAllSounds() {
-        if (currentAudio) {
-            currentAudio.pause();
-            currentAudio.currentTime = 0;
-            currentAudio = null;
-        }
-        if (currentProgressInterval) {
-            clearInterval(currentProgressInterval);
-            currentProgressInterval = null;
-        }
-        document.querySelectorAll('.play-pause').forEach(btn => {
-            if (btn.innerText !== 'Play') btn.innerText = 'Play';
-        });
-        const bigPlayIcon = document.getElementById('bigPlayIcon');
-        if (bigPlayIcon) bigPlayIcon.innerText = '▶️';
-        const bigProgress = document.getElementById('bigProgress');
-        if(bigProgress) bigProgress.value = 0;
-    }
-
-    function formatTime(seconds) {
-        if(isNaN(seconds)) return "0:00";
-        let mins = Math.floor(seconds / 60);
-        let secs = Math.floor(seconds % 60);
-        return `${mins}:${secs < 10 ? '0' : ''}${secs}`;
-    }
-
-    function bindProgress(audioElement, progressSlider, timeLabel) {
-        if (currentProgressInterval) clearInterval(currentProgressInterval);
-        const update = () => {
-            if (audioElement && !isNaN(audioElement.duration)) {
-                if (progressSlider) progressSlider.value = (audioElement.currentTime / audioElement.duration) * 100 || 0;
-                if (timeLabel) timeLabel.innerText = formatTime(audioElement.currentTime);
-            }
-        };
-        update();
-        currentProgressInterval = setInterval(() => {
-            if (audioElement && !audioElement.paused) update();
-            if (audioElement && audioElement.ended) {
-                if(activeTrackElement) activeTrackElement.innerText = 'Play';
-                if(currentProgressInterval) clearInterval(currentProgressInterval);
-                currentProgressInterval = null;
-                currentAudio = null;
-                activeTrackElement = null;
-            }
-        }, 200);
-    }
-
-    function setupTrack(audio, playBtn, progressSlider, timeSpan) {
-        playBtn.onclick = () => {
-            if (currentAudio && currentAudio !== audio) stopAllSounds();
-            if (audio.paused) {
-                audio.play().catch(e => console.log(e));
-                playBtn.innerText = 'Pause';
-                activeTrackElement = playBtn;
-                currentAudio = audio;
-                bindProgress(audio, progressSlider, timeSpan);
-            } else {
-                audio.pause();
-                playBtn.innerText = 'Play';
-                if (currentProgressInterval) clearInterval(currentProgressInterval);
-                currentProgressInterval = null;
-            }
-        };
-        audio.addEventListener('ended', () => {
-            playBtn.innerText = 'Play';
-            if(currentAudio === audio) currentAudio = null;
-            if(currentProgressInterval) clearInterval(currentProgressInterval);
-            currentProgressInterval = null;
-        });
-        progressSlider.addEventListener('input', (e) => {
-            if (audio.duration) audio.currentTime = (e.target.value / 100) * audio.duration;
-        });
-    }
-
-    let currentPath = '/';
-
-    function navigateTo(path, addToHistory = true) {
-        if (currentPath === path) return;
-        currentPath = path;
-        if (addToHistory) window.history.pushState({ path }, '', path);
-        renderPageByPath(path);
-    }
-
-    function renderPageByPath(path) {
-        const appContainer = document.getElementById('appRoot');
-        const headerHtml = `
-            <div class="gaming-header">
-                <div class="logo">
-                    <h1>🔊 BLIE SOUNDS</h1>
-                    <span>ESPORTS AUDIO HUB</span>
+        <div id="view-game-musics" class="view">
+            <h2>Oyun Müzikleri</h2>
+            <div class="grid-container">
+                <div class="card" onclick="navigateTo('/game-musics/a-strange-man')">
+                    <i class="fa-solid fa-gamepad"></i>
+                    <h3>A Strange Man Oyun Serisi</h3>
                 </div>
-                <div class="nav-tabs">
-                    <button class="tab-btn ${path === '/' || path.startsWith('/game-musics') ? 'active' : ''}" data-nav="game">🎮 Oyun Müzikleri</button>
-                    <button class="tab-btn ${path === '/site-musics' ? 'active' : ''}" data-nav="site">🌐 Site Müzikleri</button>
+                <div class="card" onclick="navigateTo('/game-musics/gold-gun')">
+                    <i class="fa-solid fa-crosshairs"></i>
+                    <h3>Gold Gun</h3>
                 </div>
             </div>
-            <div class="page-view" id="dynamicPage"></div>
-        `;
-        appContainer.innerHTML = headerHtml;
-        const dynamicDiv = document.getElementById('dynamicPage');
+        </div>
 
-        if (path === '/') {
-            dynamicDiv.innerHTML = `<div class="game-cards">
-                <div class="game-card" data-game="a-strange-man"><h2>A STRANGE MAN<br>OYUN SERİSİ</h2><p>🎧 Karanlık epik müzikler</p></div>
-                <div class="game-card" data-game="gold-gun"><h2>GOLD GUN</h2><p>🔫 Aksiyon & Western</p></div>
-            </div>`;
-            dynamicDiv.querySelectorAll('.game-card').forEach(card => {
-                card.addEventListener('click', () => {
-                    const game = card.getAttribute('data-game');
-                    if (game === 'a-strange-man') navigateTo('/game-musics/a-strange-man');
-                    else navigateTo('/game-musics/gold-gun');
-                });
-            });
-        }
-        else if (path === '/site-musics') {
-            dynamicDiv.innerHTML = `<div class="info-placeholder">🎵 Site Müzikleri Bölümü Yakında! <br> ⚡ E-spor ritimleri hazırlanıyor.</div>`;
-        }
-        else if (path === '/game-musics') {
-            dynamicDiv.innerHTML = `<div><button class="back-button" id="backHomeBtn">◀ Ana Sayfa</button>
-            <div class="game-cards">
-                <div class="game-card" data-game="a-strange-man"><h2>A STRANGE MAN</h2><p>Serüven evreni</p></div>
-                <div class="game-card" data-game="gold-gun"><h2>GOLD GUN</h2><p>Vahşi batı nişancı</p></div>
-            </div></div>`;
-            dynamicDiv.querySelectorAll('.game-card').forEach(card => {
-                card.addEventListener('click', () => {
-                    const game = card.getAttribute('data-game');
-                    if (game === 'a-strange-man') navigateTo('/game-musics/a-strange-man');
-                    else navigateTo('/game-musics/gold-gun');
-                });
-            });
-            document.getElementById('backHomeBtn')?.addEventListener('click', () => navigateTo('/'));
-        }
-        else if (path === '/game-musics/gold-gun') {
-            dynamicDiv.innerHTML = `<div><button class="back-button" id="backGameMusic">◀ Geri</button>
-            <h2 style="margin:20px 0 10px">🔫 GOLD GUN Müzikleri</h2>
-            <div class="music-list" id="goldGunList"></div></div>`;
-            const listDiv = dynamicDiv.querySelector('#goldGunList');
-            goldGunSongs.forEach((song) => {
-                const item = document.createElement('div');
-                item.className = 'music-item';
-                item.innerHTML = `
-                    <div class="music-info">🎵 ${song.name}</div>
-                    <div class="controls">
-                        <button class="play-pause">Play</button>
-                        <div class="progress-wrapper">
-                            <input type="range" value="0" step="1" class="progress-slider">
-                            <span class="time">0:00</span>
+        <div id="view-gold-gun" class="view">
+            <h2>Gold Gun Müzikleri</h2>
+            <div class="track-list">
+                <div class="music-row">
+                    <div class="track-info">
+                        <i class="fa-solid fa-music"></i>
+                        <span class="track-name">Gold Gun Theme</span>
+                    </div>
+                    <div class="player-controls">
+                        <audio class="audio-element" src="gold-gun-main.mp3"></audio>
+                        <button class="play-btn" onclick="togglePlay(this)">
+                            <i class="fa-solid fa-play"></i>
+                        </button>
+                        <div class="progress-container">
+                            <span class="time-display current">0:00</span>
+                            <input type="range" class="progress-bar" value="0" min="0" max="100">
+                            <span class="time-display duration">0:00</span>
                         </div>
                     </div>
-                `;
-                const audio = new Audio(song.src);
-                const playBtn = item.querySelector('.play-pause');
-                const slider = item.querySelector('.progress-slider');
-                const timeSpan = item.querySelector('.time');
-                setupTrack(audio, playBtn, slider, timeSpan);
-                listDiv.appendChild(item);
-            });
-            document.getElementById('backGameMusic')?.addEventListener('click', () => navigateTo('/game-musics'));
-        }
-        else if (path === '/game-musics/a-strange-man') {
-            dynamicDiv.innerHTML = `<div><button class="back-button" id="backASM">◀ Geri</button>
-            <h2 style="text-align:center">A STRANGE MAN • Seçim</h2>
-            <div class="submenu">
-                <button class="choice-btn" id="fydelBtn">FYDEL</button>
-                <button class="choice-btn" id="zygaBtn">ZYGA</button>
-            </div></div>`;
-            document.getElementById('fydelBtn')?.addEventListener('click', () => navigateTo('/game-musics/a-strange-man/fydel'));
-            document.getElementById('zygaBtn')?.addEventListener('click', () => {
-                const modal = document.createElement('div');
-                modal.className = 'modal-message active';
-                modal.innerHTML = `<div class="modal-content"><p>⚠️ Şu anda bu özellik kullanılamıyor ⚠️</p><button class="close-modal">Kapat</button></div>`;
-                document.body.appendChild(modal);
-                modal.querySelector('.close-modal').addEventListener('click', () => modal.remove());
-            });
-            document.getElementById('backASM')?.addEventListener('click', () => navigateTo('/game-musics'));
-        }
-        else if (path === '/game-musics/a-strange-man/fydel') {
-            dynamicDiv.innerHTML = `<div><button class="back-button" id="backFydel">◀ Geri</button>
-            <div class="hero-player">
-                <div class="big-play" id="bigPlayBtn"><span id="bigPlayIcon">▶️</span></div>
-                <div class="song-title">🎧 FYDEL • ${fydelSong.name}</div>
-                <div class="progress-bar-big" style="width:80%">
-                    <input type="range" id="bigProgress" value="0" step="1" style="width:100%">
-                    <div style="display:flex; justify-content:space-between; margin-top:8px"><span id="bigCurrent">0:00</span><span id="bigDuration">0:00</span></div>
                 </div>
-            </div></div>`;
-            const audioBig = new Audio(fydelSong.src);
-            const bigPlayDiv = document.getElementById('bigPlayBtn');
-            const bigIcon = document.getElementById('bigPlayIcon');
-            const bigSlider = document.getElementById('bigProgress');
-            const bigCurrentSpan = document.getElementById('bigCurrent');
-            const bigDurationSpan = document.getElementById('bigDuration');
-            audioBig.addEventListener('loadedmetadata', () => {
-                bigDurationSpan.innerText = formatTime(audioBig.duration);
-            });
-            function updateBigProgress() {
-                if (audioBig.duration) {
-                    bigSlider.value = (audioBig.currentTime / audioBig.duration) * 100;
-                    bigCurrentSpan.innerText = formatTime(audioBig.currentTime);
-                }
+                <div class="music-row">
+                    <div class="track-info">
+                        <i class="fa-solid fa-music"></i>
+                        <span class="track-name">Battle Track Alpha</span>
+                    </div>
+                    <div class="player-controls">
+                        <audio class="audio-element" src="battle-alpha.mp3"></audio>
+                        <button class="play-btn" onclick="togglePlay(this)">
+                            <i class="fa-solid fa-play"></i>
+                        </button>
+                        <div class="progress-container">
+                            <span class="time-display current">0:00</span>
+                            <input type="range" class="progress-bar" value="0" min="0" max="100">
+                            <span class="time-display duration">0:00</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div id="view-a-strange-man" class="view">
+            <h2>A Strange Man Seçim Paneli</h2>
+            <div class="grid-container">
+                <div class="card" onclick="navigateTo('/game-musics/a-strange-man/fydel')">
+                    <i class="fa-solid fa-user-shield"></i>
+                    <h3>FYDEL</h3>
+                </div>
+                <div class="card" onclick="openZygaModal()">
+                    <i class="fa-solid fa-lock"></i>
+                    <h3>ZYGA</h3>
+                </div>
+            </div>
+        </div>
+
+        <div id="view-fydel" class="view">
+            <h2>A Strange Man: FYDEL</h2>
+            <div class="solo-player-container">
+                <div class="vinyl-disc" id="fydel-disc"></div>
+                <h3 style="font-size: 1.8rem; margin-bottom: 5px;">Fydel Special Theme</h3>
+                <p style="color: var(--primary); font-weight: 700;">BLI ESPORTS EXCLUSIVE</p>
+                
+                <div class="player-controls" style="flex-direction: column; margin-top: 10px;">
+                    <audio class="audio-element" id="fydel-audio" src="fydel-theme.mp3"></audio>
+                    <button class="big-play-btn" onclick="toggleSoloPlay(this)">
+                        <i class="fa-solid fa-play"></i>
+                    </button>
+                    <div class="progress-container" style="width: 100%;">
+                        <span class="time-display current">0:00</span>
+                        <input type="range" class="progress-bar" value="0" min="0" max="100">
+                        <span class="time-display duration">0:00</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </main>
+
+    <div class="modal-overlay" id="zyga-modal">
+        <div class="modal">
+            <i class="fa-solid fa-triangle-exclamation"></i>
+            <h4>Erişim Engellendi</h4>
+            <p>Şu anda bu özellik kullanılamıyor kral.</p>
+            <button class="modal-close" onclick="closeZygaModal()">Anladım</button>
+        </div>
+    </div>
+
+    <footer>
+        &copy; 2026 BLI Esports. Tüm Hakları Saklıdır.
+    </footer>
+
+    <script>
+        // --- ROUTING / SAYFA GEÇİŞ SİMÜLASYONU ---
+        const routes = {
+            '/game-musics': 'view-game-musics',
+            '/site-musics': 'view-site-musics',
+            '/game-musics/gold-gun': 'view-gold-gun',
+            '/game-musics/a-strange-man': 'view-a-strange-man',
+            '/game-musics/a-strange-man/fydel': 'view-fydel'
+        };
+
+        function navigateTo(path) {
+            // Tüm müzikleri durdur (Sayfa değişirken sesler karışmasın birader)
+            stopAllMusic();
+
+            // Tüm görünümleri kapat
+            document.querySelectorAll('.view').forEach(v => v.classList.remove('active'));
+            
+            // İlgili görünümü aç
+            const viewId = routes[path] || 'view-game-musics';
+            document.getElementById(viewId).classList.add('active');
+
+            // Aktif Tab Menü Ayarı
+            if(path === '/site-musics') {
+                document.getElementById('tab-site').classList.add('active');
+                document.getElementById('tab-game').classList.remove('active');
+            } else {
+                document.getElementById('tab-game').classList.add('active');
+                document.getElementById('tab-site').classList.remove('active');
             }
-            bigPlayDiv.onclick = () => {
-                if (currentAudio && currentAudio !== audioBig) stopAllSounds();
-                if (audioBig.paused) {
-                    audioBig.play();
-                    bigIcon.innerText = '⏸️';
-                    currentAudio = audioBig;
-                    if (currentProgressInterval) clearInterval(currentProgressInterval);
-                    currentProgressInterval = setInterval(() => {
-                        if (!audioBig.paused) updateBigProgress();
-                        if (audioBig.ended) {
-                            bigIcon.innerText = '▶️';
-                            clearInterval(currentProgressInterval);
-                            currentAudio = null;
-                        }
-                    }, 200);
-                } else {
-                    audioBig.pause();
-                    bigIcon.innerText = '▶️';
-                    if(currentProgressInterval) clearInterval(currentProgressInterval);
-                    currentProgressInterval = null;
+
+            // URL'i güncelle (Sayfa yenilenmediği sürece tarayıcıda temiz görünür)
+            history.pushState({path: path}, '', path);
+        }
+
+        // Tarayıcının geri/ileri tuşları tetiklendiğinde çalışacak kısım
+        window.addEventListener('popstate', (e) => {
+            if(e.state && e.state.path) {
+                navigateTo(e.state.path);
+            } else {
+                navigateTo('/game-musics');
+            }
+        });
+
+        // Site ilk açıldığında çalışacak varsayılan sayfa
+        window.addEventListener('DOMContentLoaded', () => {
+            navigateTo('/game-musics');
+            initAudioPlayers();
+        });
+
+        // --- ZYGA UYARI PENCERESİ FONKSİYONLARI ---
+        function openZygaModal() {
+            document.getElementById('zyga-modal').classList.add('open');
+        }
+
+        function closeZygaModal() {
+            document.getElementById('zyga-modal').classList.remove('open');
+        }
+
+        // --- MÜZİK ÇALAR YAPISI VE KONTROLLERİ ---
+        function stopAllMusic() {
+            document.querySelectorAll('audio').forEach(audio => {
+                audio.pause();
+                // Oynatma ikonlarını eski haline döndür
+                const playBtn = audio.nextElementSibling;
+                if(playBtn && playBtn.querySelector('i')) {
+                    playBtn.querySelector('i').className = 'fa-solid fa-play';
                 }
-            };
-            bigSlider.addEventListener('input', (e) => {
-                if (audioBig.duration) audioBig.currentTime = (e.target.value / 100) * audioBig.duration;
-                updateBigProgress();
             });
-            audioBig.addEventListener('ended', () => {
-                bigIcon.innerText = '▶️';
-                if(currentProgressInterval) clearInterval(currentProgressInterval);
-                currentProgressInterval = null;
-                currentAudio = null;
+            // Fydel özel buton ve diskini sıfırla
+            const bigBtn = document.querySelector('.big-play-btn i');
+            if(bigBtn) bigBtn.className = 'fa-solid fa-play';
+            document.getElementById('fydel-disc').classList.remove('rotating');
+        }
+
+        function formatTime(seconds) {
+            let min = Math.floor(seconds / 60);
+            let sec = Math.floor(seconds % 60);
+            if (sec < 10) sec = `0${sec}`;
+            return `${min}:${sec}`;
+        }
+
+        function initAudioPlayers() {
+            document.querySelectorAll('.player-controls').forEach(controlPanel => {
+                const audio = controlPanel.querySelector('.audio-element');
+                const progressBar = controlPanel.querySelector('.progress-bar');
+                const currentTimeDisp = controlPanel.querySelector('.current');
+                const durationTimeDisp = controlPanel.querySelector('.duration');
+
+                // Süre bilgisi yüklendiğinde yaz
+                audio.addEventListener('loadedmetadata', () => {
+                    durationTimeDisp.textContent = formatTime(audio.duration);
+                });
+
+                // Zaman güncellendikçe barı ilerlet
+                audio.addEventListener('timeupdate', () => {
+                    if (!audio.duration) return;
+                    const percent = (audio.currentTime / audio.duration) * 100;
+                    progressBar.value = percent;
+                    currentTimeDisp.textContent = formatTime(audio.currentTime);
+                });
+
+                // Kullanıcı barı kaydırdığında şarkı süresini değiştir
+                progressBar.addEventListener('input', () => {
+                    const time = (progressBar.value / 100) * audio.duration;
+                    audio.currentTime = time;
+                });
+                
+                // Şarkı bittiğinde ikonu sıfırla
+                audio.addEventListener('ended', () => {
+                    const icon = controlPanel.querySelector('.play-btn i') || controlPanel.querySelector('.big-play-btn i');
+                    if(icon) icon.className = 'fa-solid fa-play';
+                    document.getElementById('fydel-disc').classList.remove('rotating');
+                    progressBar.value = 0;
+                    currentTimeDisp.textContent = "0:00";
+                });
             });
-            document.getElementById('backFydel')?.addEventListener('click', () => navigateTo('/game-musics/a-strange-man'));
-        }
-        else {
-            dynamicDiv.innerHTML = `<div class="info-placeholder">404 | Sayfa bulunamadı.<button class="back-button" style="margin-top:20px" id="goHome">Ana Sayfa</button></div>`;
-            document.getElementById('goHome')?.addEventListener('click', () => navigateTo('/'));
         }
 
-        const gameTab = document.querySelector('[data-nav="game"]');
-        const siteTab = document.querySelector('[data-nav="site"]');
-        if (gameTab) gameTab.addEventListener('click', () => navigateTo('/game-musics'));
-        if (siteTab) siteTab.addEventListener('click', () => navigateTo('/site-musics'));
-        if(path === '/site-musics') {
-            siteTab?.classList.add('active');
-            gameTab?.classList.remove('active');
-        } else {
-            gameTab?.classList.add('active');
-            siteTab?.classList.remove('active');
-        }
-    }
+        // Çoklu Liste için Oynat/Durdur (Gold Gun Sayfası)
+        function togglePlay(btn) {
+            const audio = btn.previousElementSibling;
+            const icon = btn.querySelector('i');
 
-    window.addEventListener('popstate', () => {
-        const path = window.location.pathname;
-        if (path === '/' || path === '/site-musics' || path === '/game-musics' || path === '/game-musics/gold-gun' || path === '/game-musics/a-strange-man' || path === '/game-musics/a-strange-man/fydel') {
-            currentPath = path;
-            renderPageByPath(path);
-        } else {
-            navigateTo('/', false);
+            if(audio.paused) {
+                // Diğer her şeyi sustur
+                stopAllMusic();
+                audio.play();
+                icon.className = 'fa-solid fa-pause';
+            } else {
+                audio.pause();
+                icon.className = 'fa-solid fa-play';
+            }
         }
-    });
 
-    let startPath = window.location.pathname;
-    if (startPath !== '/' && !startPath.includes('/game-musics') && startPath !== '/site-musics') startPath = '/';
-    navigateTo(startPath, false);
-</script>
+        // Tekli Özel Player için Oynat/Durdur (Fydel Sayfası)
+        function toggleSoloPlay(btn) {
+            const audio = document.getElementById('fydel-audio');
+            const icon = btn.querySelector('i');
+            const disc = document.getElementById('fydel-disc');
+
+            if(audio.paused) {
+                stopAllMusic();
+                audio.play();
+                icon.className = 'fa-solid fa-pause';
+                disc.classList.add('rotating');
+            } else {
+                audio.pause();
+                icon.className = 'fa-solid fa-play';
+                disc.classList.remove('rotating');
+            }
+        }
+    </script>
 </body>
 </html>
