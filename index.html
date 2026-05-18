@@ -9,7 +9,7 @@
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            user-select: none; /* oyuncu hissi, kullanıcı seçimini engelle */
+            user-select: none;
         }
 
         body {
@@ -22,7 +22,6 @@
             overflow-x: hidden;
         }
 
-        /* neon glow efekti */
         body::before {
             content: "";
             position: fixed;
@@ -35,7 +34,6 @@
             z-index: 0;
         }
 
-        /* ana container */
         .app-container {
             max-width: 1300px;
             margin: 0 auto;
@@ -44,7 +42,6 @@
             backdrop-filter: blur(2px);
         }
 
-        /* header - gaming tarzı */
         .gaming-header {
             display: flex;
             justify-content: space-between;
@@ -75,7 +72,6 @@
             letter-spacing: 1px;
         }
 
-        /* ana navigasyon menüsü (sekme) */
         .nav-tabs {
             display: flex;
             gap: 20px;
@@ -96,7 +92,6 @@
             color: #ccddee;
             transition: all 0.2s ease;
             letter-spacing: 1px;
-            backdrop-filter: blur(2px);
         }
         .tab-btn.active {
             background: #0aff9e20;
@@ -111,7 +106,6 @@
             transform: scale(1.02);
         }
 
-        /* sayfa geçiş animasyonu */
         .page-view {
             animation: fadeSlideUp 0.35s cubic-bezier(0.2, 0.9, 0.4, 1.1);
         }
@@ -126,7 +120,6 @@
             }
         }
 
-        /* kart stilleri - oyuncu */
         .game-cards {
             display: flex;
             flex-wrap: wrap;
@@ -144,7 +137,6 @@
             transition: all 0.25s ease;
             border: 1px solid #2affaa30;
             box-shadow: 0 15px 35px rgba(0,0,0,0.6);
-            backdrop-filter: blur(8px);
         }
         .game-card:hover {
             transform: translateY(-8px);
@@ -159,13 +151,7 @@
             background-clip: text;
             color: transparent;
         }
-        .game-card p {
-            margin-top: 15px;
-            color: #aaddff;
-            font-weight: 500;
-        }
 
-        /* müzik listesi */
         .music-list {
             background: rgba(12, 18, 28, 0.7);
             backdrop-filter: blur(8px);
@@ -185,7 +171,6 @@
             padding: 15px 25px;
             border-radius: 60px;
             border-left: 5px solid #0aff9e;
-            transition: 0.1s;
         }
         .music-info {
             flex: 3;
@@ -208,7 +193,6 @@
             border-radius: 40px;
             cursor: pointer;
             font-weight: bold;
-            transition: 0.1s;
             min-width: 95px;
         }
         .play-pause:hover {
@@ -247,7 +231,6 @@
             border-radius: 20px;
         }
 
-        /* fydel özel player */
         .hero-player {
             display: flex;
             flex-direction: column;
@@ -273,7 +256,6 @@
             cursor: pointer;
             transition: 0.2s;
             margin-bottom: 35px;
-            backdrop-filter: blur(5px);
         }
         .big-play:hover {
             background: #0aff9e;
@@ -291,7 +273,6 @@
             margin: 20px 0;
         }
 
-        /* modal - özel zyga */
         .modal-message {
             position: fixed;
             top: 0;
@@ -319,7 +300,6 @@
             text-align: center;
             border: 2px solid #ff44aa;
             box-shadow: 0 0 40px #ff44aa70;
-            font-family: 'Orbitron', monospace;
         }
         .modal-content p {
             font-size: 1.6rem;
@@ -336,12 +316,10 @@
             color: white;
         }
 
-        /* responsive */
         @media (max-width: 700px) {
             .gaming-header {
                 flex-direction: column;
                 gap: 18px;
-                border-radius: 40px;
             }
             .music-item {
                 flex-direction: column;
@@ -350,12 +328,6 @@
             .controls {
                 justify-content: space-between;
             }
-        }
-
-        button {
-            background: none;
-            border: none;
-            font-family: inherit;
         }
 
         .back-button {
@@ -369,7 +341,6 @@
             display: inline-flex;
             align-items: center;
             gap: 6px;
-            transition: 0.2s;
         }
         .back-button:hover {
             background: #0aff9e30;
@@ -378,6 +349,8 @@
             display: flex;
             gap: 20px;
             margin-bottom: 25px;
+            justify-content: center;
+            margin-top: 40px;
         }
         .choice-btn {
             background: #11161f;
@@ -387,13 +360,11 @@
             font-size: 1.3rem;
             font-weight: bold;
             cursor: pointer;
-            transition: 0.1s;
         }
         .choice-btn:hover {
             background: cyan;
             color: black;
         }
-
         .info-placeholder {
             text-align: center;
             padding: 80px 20px;
@@ -403,25 +374,19 @@
     </style>
 </head>
 <body>
-<div class="app-container" id="appRoot">
-    <!-- header dinamik olarak root içinde, ama sabit tutmak için yapılandıralım -->
-</div>
+<div class="app-container" id="appRoot"></div>
 
 <script>
-    // ------------------------- MÜZİK VERİLERİ (demo) -------------------------
-    // Gold Gun şarkıları
     const goldGunSongs = [
         { name: "Gold Gun - Main Theme", src: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3" },
         { name: "Gold Gun - Combat Rage", src: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-2.mp3" },
         { name: "Gold Gun - Victory Lobby", src: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-3.mp3" }
     ];
-    // Fydel özel müzik
     const fydelSong = { name: "FYDEL - Dark Requiem", src: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-4.mp3" };
 
-    // Audio controller yönetimi: aktif oynatıcıyı takip et
     let currentAudio = null;
     let currentProgressInterval = null;
-    let activeTrackElement = null;   // DOM referansı
+    let activeTrackElement = null;
 
     function stopAllSounds() {
         if (currentAudio) {
@@ -433,17 +398,13 @@
             clearInterval(currentProgressInterval);
             currentProgressInterval = null;
         }
-        // butonları 'Play' yap
         document.querySelectorAll('.play-pause').forEach(btn => {
             if (btn.innerText !== 'Play') btn.innerText = 'Play';
         });
-        // büyük player varsa iconu ▶️ yap
         const bigPlayIcon = document.getElementById('bigPlayIcon');
         if (bigPlayIcon) bigPlayIcon.innerText = '▶️';
         const bigProgress = document.getElementById('bigProgress');
         if(bigProgress) bigProgress.value = 0;
-        const bigCurrent = document.getElementById('bigCurrentTime');
-        if(bigCurrent) bigCurrent.innerText = '0:00';
     }
 
     function formatTime(seconds) {
@@ -453,9 +414,8 @@
         return `${mins}:${secs < 10 ? '0' : ''}${secs}`;
     }
 
-    function bindProgress(audioElement, progressSlider, timeLabel, isBig = false) {
+    function bindProgress(audioElement, progressSlider, timeLabel) {
         if (currentProgressInterval) clearInterval(currentProgressInterval);
-        if (!audioElement) return;
         const update = () => {
             if (audioElement && !isNaN(audioElement.duration)) {
                 if (progressSlider) progressSlider.value = (audioElement.currentTime / audioElement.duration) * 100 || 0;
@@ -464,15 +424,9 @@
         };
         update();
         currentProgressInterval = setInterval(() => {
-            if (audioElement && !audioElement.paused && audioElement.currentTime) update();
-            else if (audioElement && audioElement.paused) {}
+            if (audioElement && !audioElement.paused) update();
             if (audioElement && audioElement.ended) {
-                // şarkı bittiğinde butonları sıfırla
                 if(activeTrackElement) activeTrackElement.innerText = 'Play';
-                if (isBig) {
-                    const bigBtn = document.getElementById('bigPlayIcon');
-                    if(bigBtn) bigBtn.innerText = '▶️';
-                }
                 if(currentProgressInterval) clearInterval(currentProgressInterval);
                 currentProgressInterval = null;
                 currentAudio = null;
@@ -481,13 +435,11 @@
         }, 200);
     }
 
-    function setupTrack(audio, playBtn, progressSlider, timeSpan, onDestroy) {
+    function setupTrack(audio, playBtn, progressSlider, timeSpan) {
         playBtn.onclick = () => {
-            if (currentAudio && currentAudio !== audio) {
-                stopAllSounds();
-            }
+            if (currentAudio && currentAudio !== audio) stopAllSounds();
             if (audio.paused) {
-                audio.play().catch(e => console.log("play err", e));
+                audio.play().catch(e => console.log(e));
                 playBtn.innerText = 'Pause';
                 activeTrackElement = playBtn;
                 currentAudio = audio;
@@ -506,30 +458,16 @@
             currentProgressInterval = null;
         });
         progressSlider.addEventListener('input', (e) => {
-            if (audio.duration) {
-                audio.currentTime = (e.target.value / 100) * audio.duration;
-            }
+            if (audio.duration) audio.currentTime = (e.target.value / 100) * audio.duration;
         });
     }
-
-    // ---------- SAYFA YÖNLENDİRME SİMÜLASYONU (History API) ----------
-    const routes = {
-        '/': 'home',
-        '/site-musics': 'siteMusics',
-        '/game-musics': 'gameMusics',
-        '/game-musics/gold-gun': 'goldGun',
-        '/game-musics/a-strange-man': 'aStrangeMan',
-        '/game-musics/a-strange-man/fydel': 'fydelPage'
-    };
 
     let currentPath = '/';
 
     function navigateTo(path, addToHistory = true) {
         if (currentPath === path) return;
         currentPath = path;
-        if (addToHistory) {
-            window.history.pushState({ path }, '', path);
-        }
+        if (addToHistory) window.history.pushState({ path }, '', path);
         renderPageByPath(path);
     }
 
@@ -550,14 +488,14 @@
         `;
         appContainer.innerHTML = headerHtml;
         const dynamicDiv = document.getElementById('dynamicPage');
-        // sayfa içerik üretimi
+
         if (path === '/') {
             dynamicDiv.innerHTML = `<div class="game-cards">
                 <div class="game-card" data-game="a-strange-man"><h2>A STRANGE MAN<br>OYUN SERİSİ</h2><p>🎧 Karanlık epik müzikler</p></div>
                 <div class="game-card" data-game="gold-gun"><h2>GOLD GUN</h2><p>🔫 Aksiyon & Western</p></div>
             </div>`;
             dynamicDiv.querySelectorAll('.game-card').forEach(card => {
-                card.addEventListener('click', (e) => {
+                card.addEventListener('click', () => {
                     const game = card.getAttribute('data-game');
                     if (game === 'a-strange-man') navigateTo('/game-musics/a-strange-man');
                     else navigateTo('/game-musics/gold-gun');
@@ -574,7 +512,7 @@
                 <div class="game-card" data-game="gold-gun"><h2>GOLD GUN</h2><p>Vahşi batı nişancı</p></div>
             </div></div>`;
             dynamicDiv.querySelectorAll('.game-card').forEach(card => {
-                card.addEventListener('click', (e) => {
+                card.addEventListener('click', () => {
                     const game = card.getAttribute('data-game');
                     if (game === 'a-strange-man') navigateTo('/game-musics/a-strange-man');
                     else navigateTo('/game-musics/gold-gun');
@@ -583,12 +521,11 @@
             document.getElementById('backHomeBtn')?.addEventListener('click', () => navigateTo('/'));
         }
         else if (path === '/game-musics/gold-gun') {
-            let songsHtml = `<div><button class="back-button" id="backGameMusic">◀ Geri</button>
+            dynamicDiv.innerHTML = `<div><button class="back-button" id="backGameMusic">◀ Geri</button>
             <h2 style="margin:20px 0 10px">🔫 GOLD GUN Müzikleri</h2>
             <div class="music-list" id="goldGunList"></div></div>`;
-            dynamicDiv.innerHTML = songsHtml;
             const listDiv = dynamicDiv.querySelector('#goldGunList');
-            goldGunSongs.forEach((song, idx) => {
+            goldGunSongs.forEach((song) => {
                 const item = document.createElement('div');
                 item.className = 'music-item';
                 item.innerHTML = `
@@ -612,7 +549,7 @@
         }
         else if (path === '/game-musics/a-strange-man') {
             dynamicDiv.innerHTML = `<div><button class="back-button" id="backASM">◀ Geri</button>
-            <h2>A STRANGE MAN • Seçim</h2>
+            <h2 style="text-align:center">A STRANGE MAN • Seçim</h2>
             <div class="submenu">
                 <button class="choice-btn" id="fydelBtn">FYDEL</button>
                 <button class="choice-btn" id="zygaBtn">ZYGA</button>
@@ -658,7 +595,6 @@
                     audioBig.play();
                     bigIcon.innerText = '⏸️';
                     currentAudio = audioBig;
-                    activeTrackElement = null;
                     if (currentProgressInterval) clearInterval(currentProgressInterval);
                     currentProgressInterval = setInterval(() => {
                         if (!audioBig.paused) updateBigProgress();
@@ -692,12 +628,10 @@
             document.getElementById('goHome')?.addEventListener('click', () => navigateTo('/'));
         }
 
-        // Yeniden header butonlarına event bağla
         const gameTab = document.querySelector('[data-nav="game"]');
         const siteTab = document.querySelector('[data-nav="site"]');
         if (gameTab) gameTab.addEventListener('click', () => navigateTo('/game-musics'));
         if (siteTab) siteTab.addEventListener('click', () => navigateTo('/site-musics'));
-        // eğer aktif path game-musics altındaysa active classını güncelle
         if(path === '/site-musics') {
             siteTab?.classList.add('active');
             gameTab?.classList.remove('active');
@@ -707,10 +641,9 @@
         }
     }
 
-    // popstate ile geri/ileri yönetimi
-    window.addEventListener('popstate', (event) => {
+    window.addEventListener('popstate', () => {
         const path = window.location.pathname;
-        if (routes.hasOwnProperty(path) || path === '/' || path === '/game-musics' || path === '/site-musics' || path === '/game-musics/gold-gun' || path === '/game-musics/a-strange-man' || path === '/game-musics/a-strange-man/fydel') {
+        if (path === '/' || path === '/site-musics' || path === '/game-musics' || path === '/game-musics/gold-gun' || path === '/game-musics/a-strange-man' || path === '/game-musics/a-strange-man/fydel') {
             currentPath = path;
             renderPageByPath(path);
         } else {
@@ -718,9 +651,8 @@
         }
     });
 
-    // başlangıç: kök dizini kontrol et
     let startPath = window.location.pathname;
-    if (!routes.hasOwnProperty(startPath) && startPath !== '/' && !startPath.includes('/game-musics')) startPath = '/';
+    if (startPath !== '/' && !startPath.includes('/game-musics') && startPath !== '/site-musics') startPath = '/';
     navigateTo(startPath, false);
 </script>
 </body>
